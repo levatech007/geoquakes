@@ -4,7 +4,7 @@ var weekly_quakes_endpoint = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/s
 
 $(document).ready(function() {
   console.log("Let's get coding!");
-  var uluru = {lat: 37.78, lng: -122.44};
+      var uluru = {lat: 37.78, lng: -122.44};
       map = new google.maps.Map(document.getElementById('map'), {
         center: uluru,
         zoom: 8
@@ -13,6 +13,8 @@ $(document).ready(function() {
         position: uluru,
         map: map
       });
+
+
 
 
       let ajaxOptions = {
@@ -37,10 +39,23 @@ $(document).ready(function() {
 
         //console.log(quakeTime);
         let quakeCoordinates = quakes.map (function(quake) {return  quake.geometry.coordinates});
-        console.log(quakeCoordinates);
+      //  console.log(quakeCoordinates);
+
+        let longitude = quakeCoordinates.map(function(quake) {return quake[0]});
+        let latitude = quakeCoordinates.map(function(quake) {return quake[1]});
+
+        for ( let i = 0; i < quakeCoordinates.length; i++){
+            marker = new google.maps.Marker({
+              position: {lat: latitude[i], lng: longitude[i]},
+              map: map
+            });
+        }
+
         quakeTitles.map (function(title){  //map function appends mutiple images in a loop
           $("div#info").append(`<p>${title}</p>`);
+
         });
+
      };
 
 
