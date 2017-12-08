@@ -4,7 +4,16 @@ var weekly_quakes_endpoint = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/s
 
 $(document).ready(function() {
   console.log("Let's get coding!");
-  // CODE IN HERE!
+  var uluru = {lat: 37.78, lng: -122.44};
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: uluru,
+        zoom: 8
+      });
+      marker = new google.maps.Marker({
+        position: uluru,
+        map: map
+      });
+
 
       let ajaxOptions = {
         method: 'GET',
@@ -34,13 +43,15 @@ $(document).ready(function() {
         });
      };
 
+
       function onError() {
         console.log("error");
       };
 
-      $.ajax(ajaxOptions);
+      //$.ajax(ajaxOptions);
 
-      // setTimeout(function() {
+
+      // setTimeout(function() { // function to refresh data in the background
       //   $.ajaxOptions(ajaxOptions);
       // }, //specify time);
 
